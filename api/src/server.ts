@@ -1,4 +1,5 @@
 import Hapi from "hapi";
+import { applyRoutes } from "./routes";
 
 const PORT = +process.env.PORT || 3000;
 
@@ -8,6 +9,8 @@ const server = new Hapi.Server({
   port: PORT,
   host: "localhost"
 });
+
+applyRoutes(server);
 
 const init = async () => {
   await server.start();
