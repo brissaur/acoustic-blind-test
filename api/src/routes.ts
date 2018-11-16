@@ -6,7 +6,7 @@ export function applyRoutes(server: Server) {
   server.route({
     method: "GET",
     path: "/hello",
-    handler: function(request, h) {
+    handler(request, h) {
       return "hello world";
     }
   });
