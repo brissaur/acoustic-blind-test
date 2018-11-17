@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.358.0",
     "hapi": "^17.7.0"
   },
   "devDependencies": {
