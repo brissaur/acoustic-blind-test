@@ -8,3 +8,5 @@ npm-debug.*
 
 .jest
 **/__snapshots__/**
+yarn-error.log
+todo.md
