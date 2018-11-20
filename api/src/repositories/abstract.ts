@@ -1,6 +1,6 @@
 export class AbstractRepository{
     db: any;
-    constructor(connection){
+    constructor(connection: any){
         this.db = connection;
     }
 }

@@ -1,32 +1,15 @@
 export const schema = {
     "RequestItems": {
-        "songs" : {
-            "ConsistentRead": boolean,
-            "ExpressionAttributeNames": {
-                "string" : "string"
-            },
+        "acoustic-blindtest_songs" : {
+            "ConsistentRead": false,
             "Keys": [
                 {
-                    "string" : {
-                        "B": blob,
-                        "BOOL": boolean,
-                        "BS": [ blob ],
-                        "L": [
-                            "AttributeValue"
-                        ],
-                        "M": {
-                            "string" : "AttributeValue"
-                        },
-                        "N": "string",
-                        "NS": [ "string" ],
-                        "NULL": boolean,
-                        "S": "string",
-                        "SS": [ "string" ]
+                    "id" : {
+                        "N": "1"
                     }
                 }
             ],
-            "ProjectionExpression": "string"
         }
     },
-    "ReturnConsumedCapacity": "string"
+    "ReturnConsumedCapacity": "NONE"
 };
