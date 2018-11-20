@@ -1,22 +1,23 @@
-import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
 // @ts-ignore
 import { AppLoading, Asset, Font, Icon } from "expo";
+import * as React from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Provider, Subscribe } from "unstated";
 import AppNavigator from "./navigation/AppNavigator";
-
-const a: number = 3;
-console.log("a", a);
+import UnstateContainer from "./UnstateContainer";
+import { Text } from "react-native-elements";
 
 interface IProps {
   skipLoadingScreen?: boolean;
 }
 
-export default class App extends React.Component<IProps> {
+export default class AppWithoutState extends React.Component<IProps> {
   state = {
     isLoadingComplete: false
   };
 
   render() {
+    console.log("robin1");
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -26,10 +27,25 @@ export default class App extends React.Component<IProps> {
         />
       );
     } else {
+      console.log("robin2");
       return (
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          <Provider>
+            <AppNavigator />
+            {/* <Subscribe to={[UnstateContainer]}>
+              {store => (
+                <>
+                  <Text>Rob,,,</Text>
+                  <Text>Rob,,,</Text>
+                  <Text>Rob,,,</Text>
+                  <Text>Rob,,,</Text>
+                  <Text>Rob,,,</Text>
+                  <Text>Rob,,,</Text>
+                </>
+              )}
+            </Subscribe> */}
+          </Provider>
         </View>
       );
     }
@@ -68,3 +84,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   }
 });
+
+// export default function App2() {
+//   return (
+//     <Provider>
+//       <AppWithoutState />
+//     </Provider>
+//   );
+// }
