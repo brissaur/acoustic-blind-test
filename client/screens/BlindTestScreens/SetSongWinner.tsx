@@ -2,10 +2,8 @@ import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
-import { nextSong } from "../../business/Song";
-import { setWinner } from "../../business/Winner";
+import { Context, IContext } from "../../context";
 
-const TEAMS = ["TEAM1", "TEAM2"]; // @todo
 export default class SetSongWinner extends React.Component<
   NavigationScreenProps
 > {
@@ -14,24 +12,41 @@ export default class SetSongWinner extends React.Component<
   };
 
   render() {
+    const songId = this.props.navigation.getParam("id");
+
     return (
       <View style={styles.container}>
-        {TEAMS.map(team => (
-          <Button
-            title={team}
-            onPress={() => {
-              setWinner(team);
-              nextSong();
-            }}
-          />
-        ))}
-        <Button
-          title={"==== NO WINNER ===="}
-          onPress={() => {
-            setWinner(null);
-            nextSong(navigation);
+        <Context.Consumer>
+          {({ teams, addResult }: IContext) => {
+            return (
+              <>
+                {teams.map(team => (
+                  <Button
+                    key={team}
+                    title={team}
+                    onPress={() => {
+                      addResult({ team, songId });
+                      const nextSong = 3;
+                      this.props.navigation.push("SongBeingPlayed", {
+                        id: nextSong
+                      });
+                    }}
+                  />
+                ))}
+                <Button
+                  title={"==== NO WINNER ===="}
+                  onPress={() => {
+                    addResult({ songId, team: null });
+                    const nextSong = 3;
+                    this.props.navigation.push("SongBeingPlayed", {
+                      id: nextSong
+                    });
+                  }}
+                />
+              </>
+            );
           }}
-        />
+        </Context.Consumer>
       </View>
     );
   }

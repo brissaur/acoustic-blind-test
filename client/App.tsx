@@ -1,11 +1,11 @@
-// @ts-ignore
+// @ts-ignore-next-line
 import { AppLoading, Asset, Font, Icon } from "expo";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { Provider, Subscribe } from "unstated";
+import { Provider } from "unstated";
+import { ContextWrapper, Context, IContext } from "./context";
 import AppNavigator from "./navigation/AppNavigator";
-import UnstateContainer from "./UnstateContainer";
-import { Text } from "react-native-elements";
+import { AppBootstrapper } from "./business/components/AppBootstrapper";
 
 interface IProps {
   skipLoadingScreen?: boolean;
@@ -17,7 +17,6 @@ export default class AppWithoutState extends React.Component<IProps> {
   };
 
   render() {
-    console.log("robin1");
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -26,29 +25,26 @@ export default class AppWithoutState extends React.Component<IProps> {
           onFinish={this._handleFinishLoading}
         />
       );
-    } else {
-      console.log("robin2");
-      return (
-        <View style={styles.container}>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <Provider>
-            <AppNavigator />
-            {/* <Subscribe to={[UnstateContainer]}>
-              {store => (
-                <>
-                  <Text>Rob,,,</Text>
-                  <Text>Rob,,,</Text>
-                  <Text>Rob,,,</Text>
-                  <Text>Rob,,,</Text>
-                  <Text>Rob,,,</Text>
-                  <Text>Rob,,,</Text>
-                </>
-              )}
-            </Subscribe> */}
-          </Provider>
-        </View>
-      );
     }
+
+    return (
+      <View style={styles.container}>
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        <Provider>
+          <ContextWrapper>
+            <Context.Consumer>
+              {({ setSongs }: IContext) => {
+                return (
+                  <AppBootstrapper setSongs={setSongs}>
+                    <AppNavigator />
+                  </AppBootstrapper>
+                );
+              }}
+            </Context.Consumer>
+          </ContextWrapper>
+        </Provider>
+      </View>
+    );
   }
 
   _loadResourcesAsync = async () => {
@@ -84,11 +80,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff"
   }
 });
-
-// export default function App2() {
-//   return (
-//     <Provider>
-//       <AppWithoutState />
-//     </Provider>
-//   );
-// }

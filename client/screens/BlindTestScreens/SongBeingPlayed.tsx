@@ -1,9 +1,8 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
-import { nextSong } from "../../business/Song";
-import { endBlindTest } from "../../business/BlindTest";
+import { Context, IContext } from "../../context";
 
 export default class SongBeingPlayed extends React.Component<
   NavigationScreenProps
@@ -13,21 +12,50 @@ export default class SongBeingPlayed extends React.Component<
   };
 
   render() {
+    const ID = this.props.navigation.getParam("id");
     return (
       <View style={styles.container}>
-        <Button
-          title="Skip"
-          onPress={() =>
-            this.props.navigation.push("SongBeingPlayed", { id: 3 })
-          }
-        />
-        <Button
-          title={"SKIP"}
-          onPress={() => {
-            nextSong();
+        <Context.Consumer>
+          {({ songs, skipSong }: IContext) => {
+            const mySong = songs.find(song => song.id === ID);
+            if (!mySong) {
+              return <Text>ERROR INVALID SONG</Text>;
+            }
+            return (
+              <>
+                <View>
+                  <Text>Playing...</Text>
+                  <Text>title: {mySong.title}</Text>
+                  <Text>artist: {mySong.artist}</Text>
+                </View>
+                <Button
+                  title="Winner"
+                  onPress={() => {
+                    this.props.navigation.push("SetSongWinner", {
+                      id: ID
+                    });
+                  }}
+                />
+                <Button
+                  title={"SKIP"}
+                  onPress={() => {
+                    skipSong(ID);
+                    const nextSong = 3;
+                    this.props.navigation.push("SongBeingPlayed", {
+                      id: nextSong
+                    });
+                  }}
+                />
+                <Button
+                  title="End"
+                  onPress={() => {
+                    this.props.navigation.push("BlindTestFinished");
+                  }}
+                />
+              </>
+            );
           }}
-        />
-        <Button title="End" onPress={() => endBlindTest()} />
+        </Context.Consumer>
       </View>
     );
   }
