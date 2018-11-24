@@ -1,8 +1,10 @@
-export default class Song{
-    id: string;
-    title: string;
-    artist: string;
-    comment: string;
+import {IEntity} from "../entitytInterface";
+
+export default class Song implements IEntity{
+    id!: string;
+    title!: string;
+    artist!: string;
+    comment!: string;
     getId(): string
     {
         return this.id;

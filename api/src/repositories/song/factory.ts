@@ -1,7 +1,9 @@
 import DataSource from '../../database';
 import SongRepository from './repository';
+import SongHydrator from './hydrator';
 
-const SongRepositoryFactory = () => {
+export const SongRepositoryFactory = () => {
     const datasource = new DataSource();
-    return new SongRepository(datasource.getConnection());
+    const hydrator = new SongHydrator();
+    return new SongRepository(datasource.getConnection(), hydrator);
 };

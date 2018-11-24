@@ -1,26 +1,21 @@
 import {AbstractRepository} from "../abstract";
 import {schema} from './scan.schema';
+import Song from "./entity";
 
 export default class SongRepository extends AbstractRepository{
-    async getAllSongs(){
-        console.log('get all songs');
-        // const callback = (err) => {
-        //     if(err){
-        //         console.log(err, err.stack);
-        //         throw new Error('An error occured with getAllSongs. See logs for details');
-        //     }
-        //     return data;
-        // };
+    async getAllSongs(): Promise<Song[]>
+    {
         try{
-            console.log('fetching.....');
             const result = await this.db.scan(schema).promise();
-            console.log('result', result.Items);
-            // console.log('fetched !', result.then((err, data) => {
-            //     console.log('data');
-            // }));
+            return result.Items.map((data: any) => {
+                const song = new Song();
+                this.hydrator.hydrate(data, song);
+                return song;
+            });
         }catch(error){
+            // @todo: Use a truly logger
             console.log('error',error);
+            throw error;
         }
-
     }
 };
