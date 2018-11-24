@@ -1,3 +1,3 @@
 export const schema = {
-    "TableName": "acoustic-blindtest_songs"
+  TableName: "acoustic-blindtest_songs"
 };

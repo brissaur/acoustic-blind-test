@@ -1,6 +1,6 @@
-import {IEntity} from "./entitytInterface";
+import { IEntity } from "./entitytInterface";
 
-export interface IHydrator{
-    hydrate(data: {}, entity: IEntity): void;
-    extract(entity: IEntity): any;
+export interface IHydrator {
+  hydrate(data: {}, entity: IEntity): void;
+  extract(entity: IEntity): any;
 }
