@@ -1,6 +1,6 @@
 import * as React from "react";
 
-type ISongId = number;
+export type ISongId = number;
 export interface ISong {
   id: ISongId;
   title: string;
@@ -18,11 +18,13 @@ const INITIAL_CONTEXT = {};
 export const Context = React.createContext(INITIAL_CONTEXT);
 
 export interface IContext extends IState {
-  addResult(result: IResult): void;
-  setSongs(songs: ISong[]): void;
-  setTeams(teams: ITeam[]): void;
-  setName(name: string): void;
-  skipSong(songId: ISongId): void;
+  getLatestContext(): IContext;
+  addResult(result: IResult): Promise<void>;
+  setSongs(songs: ISong[]): Promise<void>;
+  setTeams(teams: ITeam[]): Promise<void>;
+  setName(name: string): Promise<void>;
+  skipSong(songId: ISongId): Promise<void>;
+  replaySkipped(): Promise<void>;
 }
 type IProps = {};
 interface IState {
@@ -31,6 +33,7 @@ interface IState {
   teams: ITeam[];
   name: string;
   skipedSongs: ISongId[];
+  didReplaySkipped: boolean;
 }
 export class ContextWrapper extends React.Component<IProps, IState> {
   constructor(props: {}) {
@@ -41,25 +44,46 @@ export class ContextWrapper extends React.Component<IProps, IState> {
       results: [],
       teams: [],
       name: "",
-      skipedSongs: []
+      skipedSongs: [],
+      didReplaySkipped: false
     };
   }
 
   computeContext = (): IContext => ({
     ...this.state,
+    getLatestContext: this.computeContext,
     addResult: this.addResult,
     setSongs: this.setSongs,
     setTeams: this.setTeams,
     setName: this.setName,
-    skipSong: this.skipSong
+    skipSong: this.skipSong,
+    replaySkipped: this.replaySkipped
   });
-  setTeams = (teams: ITeam[]) => this.setState({ teams });
-  setSongs = (songs: ISong[]) => this.setState({ songs });
-  setName = (name: string) => this.setState({ name });
+
+  setTeams = (teams: ITeam[]) =>
+    new Promise(resolve => this.setState({ teams }, resolve));
+
+  setSongs = (songs: ISong[]) =>
+    new Promise(resolve => this.setState({ songs }, resolve));
+  setName = (name: string) =>
+    new Promise(resolve => this.setState({ name }, resolve));
   addResult = (result: IResult) =>
-    this.setState({ results: this.state.results.concat([result]) });
+    new Promise(resolve =>
+      this.setState({ results: this.state.results.concat([result]) }, resolve)
+    );
+
   skipSong = (songId: ISongId) =>
-    this.setState({ skipedSongs: this.state.skipedSongs.concat([songId]) });
+    new Promise(resolve =>
+      this.setState(
+        { skipedSongs: this.state.skipedSongs.concat([songId]) },
+        resolve
+      )
+    );
+
+  replaySkipped = () =>
+    new Promise(resolve =>
+      this.setState({ didReplaySkipped: true, skipedSongs: [] }, resolve)
+    );
 
   render() {
     global.console.log("CONTEXT", this.state);

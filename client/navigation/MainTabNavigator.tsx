@@ -11,13 +11,15 @@ import AddTeams from "../screens/BlindTestScreens/AddTeams";
 import SongBeingPlayed from "../screens/BlindTestScreens/SongBeingPlayed";
 import SetSongWinner from "../screens/BlindTestScreens/SetSongWinner";
 import BlindTestFinished from "../screens/BlindTestScreens/BlindTestFinished";
+import NoMoreSongs from "../screens/BlindTestScreens/NoMoreSongs";
 
 const BlindTestStack = createStackNavigator({
   NewBlindTest,
   AddTeams,
   SongBeingPlayed,
   SetSongWinner,
-  BlindTestFinished
+  BlindTestFinished,
+  NoMoreSongs
 });
 
 BlindTestStack.navigationOptions = {

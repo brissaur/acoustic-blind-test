@@ -3,8 +3,9 @@ import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { Context, IContext } from "../../context";
+import { getNextSong, goToNextSong } from "../../business/Song";
 
-export default class SetSongWinner extends React.Component<
+export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
 > {
   static navigationOptions = {
@@ -17,30 +18,30 @@ export default class SetSongWinner extends React.Component<
     return (
       <View style={styles.container}>
         <Context.Consumer>
-          {({ teams, addResult }: IContext) => {
+          {(context: IContext) => {
             return (
               <>
-                {teams.map(team => (
+                {context.teams.map(team => (
                   <Button
                     key={team}
                     title={team}
-                    onPress={() => {
-                      addResult({ team, songId });
-                      const nextSong = 3;
-                      this.props.navigation.push("SongBeingPlayed", {
-                        id: nextSong
-                      });
+                    onPress={async () => {
+                      await context.addResult({ team, songId });
+                      goToNextSong(
+                        context.getLatestContext(),
+                        this.props.navigation
+                      );
                     }}
                   />
                 ))}
                 <Button
                   title={"==== NO WINNER ===="}
-                  onPress={() => {
-                    addResult({ songId, team: null });
-                    const nextSong = 3;
-                    this.props.navigation.push("SongBeingPlayed", {
-                      id: nextSong
-                    });
+                  onPress={async () => {
+                    await context.addResult({ songId, team: null });
+                    goToNextSong(
+                      context.getLatestContext(),
+                      this.props.navigation
+                    );
                   }}
                 />
               </>
