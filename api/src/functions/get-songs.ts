@@ -1,6 +1,3 @@
-export function handler(event, context: any, callback): void {
+export function handler(event: any, context: any, callback: any): void {
   // @todo : To be done
-  console.log("event", event);
-  console.log("context", context);
-  console.log("callback", callback);
 }
