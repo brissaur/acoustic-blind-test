@@ -5,47 +5,27 @@ import { NavigationScreenProps } from "react-navigation";
 import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
 
-export default class SongBeingPlayed extends React.Component<
+export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
 > {
   static navigationOptions = {
-    title: "Song Being Played",
+    title: "No More Songs",
     headerLeft: null
   };
 
   render() {
-    const ID = this.props.navigation.getParam("id");
-
     return (
       <View style={styles.container}>
         <Context.Consumer>
           {(context: IContext) => {
-            const mySong = context.songs.find(song => song.id === ID);
-            if (!mySong) {
-              return <Text>ERROR INVALID SONG</Text>;
-            }
             return (
               <>
-                <View>
-                  <Text>Playing... {mySong.id}</Text>
-                  <Text>title: {mySong.title}</Text>
-                  <Text>artist: {mySong.artist}</Text>
-                  {mySong.comment ? (
-                    <Text>comment: {mySong.comment}</Text>
-                  ) : null}
-                </View>
+                <Text>What do you want to do?</Text>
+
                 <Button
-                  title="Winner"
-                  onPress={() => {
-                    this.props.navigation.push("SetSongWinner", {
-                      id: ID
-                    });
-                  }}
-                />
-                <Button
-                  title={"SKIP"}
+                  title={"REPLAY SKIPPED"}
                   onPress={async () => {
-                    await context.skipSong(ID);
+                    await context.replaySkipped();
 
                     goToNextSong(
                       context.getLatestContext(),

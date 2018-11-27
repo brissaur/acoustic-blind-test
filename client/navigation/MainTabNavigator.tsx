@@ -8,10 +8,18 @@ import TabBarIcon from "../components/TabBarIcon";
 import SettingsScreen from "../screens/SettingsScreen";
 import NewBlindTest from "../screens/BlindTestScreens/NewBlindTest";
 import AddTeams from "../screens/BlindTestScreens/AddTeams";
+import SongBeingPlayed from "../screens/BlindTestScreens/SongBeingPlayed";
+import SetSongWinner from "../screens/BlindTestScreens/SetSongWinner";
+import BlindTestFinished from "../screens/BlindTestScreens/BlindTestFinished";
+import NoMoreSongs from "../screens/BlindTestScreens/NoMoreSongs";
 
 const BlindTestStack = createStackNavigator({
   NewBlindTest,
-  AddTeams
+  AddTeams,
+  SongBeingPlayed,
+  SetSongWinner,
+  BlindTestFinished,
+  NoMoreSongs
 });
 
 BlindTestStack.navigationOptions = {

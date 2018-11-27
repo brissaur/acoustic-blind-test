@@ -1,43 +1,48 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
+import { Button, FormInput, FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
-import UnstateContainer from "../../UnstateContainer";
-import { Subscribe, Container } from "unstated";
+import { Context, IContext } from "../../context";
 
+interface IState {
+  name: string;
+}
 export default class NewBlindTest extends React.Component<
-  NavigationScreenProps
+  NavigationScreenProps,
+  IState
 > {
   static navigationOptions = {
     title: "New Blind Test"
   };
-
+  state: IState = { name: `Blind Test ${new Date().getTime()}` };
+  setFormName = (name: string) => this.setState({ name });
   render() {
-    // return <Text>Robi</Text>;
-    console.log("robin3");
     return (
-      // <React.Fragment>
-      //   <View style={styles.container}>
-      //     <Button
-      //       title="Next"
-      //       onPress={() => this.props.navigation.push("AddTeams")}
-      //     />
       <View style={styles.container}>
-        <Text>YALLLLLLLLAAA</Text>
-        <Text>YALLLLLLLLAAA</Text>
-        <Text>YALLLLLLLLAAA</Text>
-        <Subscribe to={[UnstateContainer]}>
-          {(store: UnstateContainer) => (
-            <Button
-              title={"INCREMENT" + store.state.count}
-              // onPress={() => store.setState({ count: 3 })}
-              onPress={() => store.increment()}
-            />
-          )}
-        </Subscribe>
+        <Context.Consumer>
+          {({ setName }: IContext) => {
+            return (
+              <>
+                <FormLabel>Name</FormLabel>
+                <FormInput
+                  value={this.state.name}
+                  onChangeText={this.setFormName}
+                />
+                <Button
+                  title="Next"
+                  onPress={() => {
+                    if (!this.state.name) {
+                      return;
+                    }
+                    setName(this.state.name);
+                    this.props.navigation.push("AddTeams");
+                  }}
+                />
+              </>
+            );
+          }}
+        </Context.Consumer>
       </View>
-      // </View>
-      // </React.Fragment>
     );
   }
 }
