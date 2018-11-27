@@ -7,11 +7,13 @@
     "start": "ts-node src/server.ts",
     "dev": "nodemon",
     "test": "jest",
-    "lint": "tslint src/**/*.ts && prettier --write src/*"
+    "lint": "tslint src/**/*.ts && prettier ./src/**.{js,ts} --list-different",
+    "format": "prettier ./src/**/*.{js,ts} --write"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.358.0",
     "hapi": "^17.7.0"
   },
   "devDependencies": {
