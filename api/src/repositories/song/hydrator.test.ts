@@ -1,11 +1,12 @@
 import SongHydrator from "./hydrator";
 import Song from "./entity";
+import { AttributeMap } from "aws-sdk/clients/dynamodb";
 
 test("hydrate method", () => {
   const hydrator = new SongHydrator();
   const song = new Song();
 
-  const data = {
+  const data: AttributeMap = {
     id: {
       N: "1"
     },
@@ -19,9 +20,10 @@ test("hydrate method", () => {
       S: "comment"
     }
   };
+
   hydrator.hydrate(data, song);
 
-  expect(song.getId()).toBe("1");
+  expect(song.getId()).toBe(1);
   expect(song.getTitle()).toBe("title");
   expect(song.getArtist()).toBe("artist");
   expect(song.getComment()).toBe("comment");

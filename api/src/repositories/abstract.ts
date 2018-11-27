@@ -1,9 +1,10 @@
 import { IHydrator } from "./hydratorInterface";
+import dynamodb from "aws-sdk/clients/dynamodb";
 
 export class AbstractRepository {
-  db: any;
+  db: dynamodb;
   hydrator: IHydrator;
-  constructor(connection: any, hydrator: IHydrator) {
+  constructor(connection: dynamodb, hydrator: IHydrator) {
     this.db = connection;
     this.hydrator = hydrator;
   }

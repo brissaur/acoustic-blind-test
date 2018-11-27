@@ -1,12 +1,12 @@
 import SongRepository from "./repository";
 
 jest.mock("aws-sdk/clients/dynamodb");
-import DynamoDb = require("aws-sdk/clients/dynamodb");
+import dynamodb from "aws-sdk/clients/dynamodb";
 import SongHydrator from "./hydrator";
 
 test("getAllSongs method works", async () => {
   const getConnection = jest.fn(() => {
-    const service = new DynamoDb();
+    const service = new dynamodb();
     service.scan = jest.fn(() => {
       return {
         promise: () => {
@@ -32,7 +32,7 @@ test("getAllSongs method works", async () => {
 
 test("getAllSongs method throw error", async () => {
   const getConnection = jest.fn(() => {
-    const service = new DynamoDb();
+    const service = new dynamodb();
     service.scan = jest.fn(() => {
       return {
         promise: () => {

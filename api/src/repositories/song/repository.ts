@@ -6,11 +6,14 @@ export default class SongRepository extends AbstractRepository {
   async getAllSongs(): Promise<Song[]> {
     try {
       const result = await this.db.scan(schema).promise();
-      return result.Items.map((data: any) => {
-        const song = new Song();
-        this.hydrator.hydrate(data, song);
-        return song;
-      });
+      if (result.Items) {
+        return result.Items.map(data => {
+          const song = new Song();
+          this.hydrator.hydrate(data, song);
+          return song;
+        });
+      }
+      return [];
     } catch (error) {
       // @todo: Use a truly logger
       console.log("error", error);
