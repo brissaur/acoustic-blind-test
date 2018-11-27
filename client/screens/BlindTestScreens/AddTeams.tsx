@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import { Button, FormLabel, FormInput } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { startBlindTest } from "../../business/BlindTest";
@@ -26,7 +26,10 @@ export default class AddTeams extends React.Component<
       : undefined;
   onTextChange = (newTeam: ITeam) => this.setState({ newTeam });
   resetInput = () => this.setState({ newTeam: "" });
-
+  removeTeam = (removedTeam: ITeam) =>
+    this.setState({
+      teams: this.state.teams.filter(team => team !== removedTeam)
+    });
   render() {
     return (
       <View style={styles.container}>
@@ -35,9 +38,14 @@ export default class AddTeams extends React.Component<
             return (
               <>
                 {this.state.teams.map((team, index) => (
-                  <Text key={team}>
-                    Team {index + 1}:{team}
-                  </Text>
+                  <View key={team} style={styles.team}>
+                    <Text>
+                      Team {index + 1}:{team}
+                    </Text>
+                    <TouchableHighlight onPress={() => this.removeTeam(team)}>
+                      <Text>DELETE</Text>
+                    </TouchableHighlight>
+                  </View>
                 ))}
                 <FormLabel>New team name:</FormLabel>
                 <FormInput
@@ -74,5 +82,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF"
+  },
+  team: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
