@@ -1,9 +1,10 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
+import Button from "../../ui/button/Button";
+import { MainPage } from "../../ui/layout/MainPage";
+import { Text } from "react-native-elements";
 
 export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
@@ -15,14 +16,14 @@ export default class NoMoreSongs extends React.Component<
 
   render() {
     return (
-      <View style={styles.container}>
+      <MainPage title="Whaaaaat?">
         <Context.Consumer>
           {(context: IContext) => {
             return (
               <>
-                <Text>What do you want to do?</Text>
+                <Text h3>There are no more songs. What do you want to do?</Text>
 
-                <Button
+                <Button.Primary
                   title={"REPLAY SKIPPED"}
                   onPress={async () => {
                     await context.replaySkipped();
@@ -33,7 +34,7 @@ export default class NoMoreSongs extends React.Component<
                     );
                   }}
                 />
-                <Button
+                <Button.Secondary
                   title="End"
                   onPress={() => {
                     this.props.navigation.push("BlindTestFinished");
@@ -43,14 +44,7 @@ export default class NoMoreSongs extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  }
-});

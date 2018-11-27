@@ -1,8 +1,10 @@
 import * as React from "react";
-import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
-import { Button, FormInput, FormLabel } from "react-native-elements";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
+import { FormInput, FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { Context, IContext } from "../../context";
+import Button from "../../ui/button/Button";
+import { MainPage } from "../../ui/layout/MainPage";
 
 interface IState {
   name: string;
@@ -20,22 +22,24 @@ export default class NewBlindTest extends React.Component<
 
   render() {
     return (
-      <View style={styles.container}>
+      <MainPage title="Please choose a name!">
         <Context.Consumer>
           {({ setName }: IContext) => {
             return (
               <>
-                <FormLabel>Name</FormLabel>
-                <View style={styles.form}>
-                  <TouchableHighlight onPress={this.resetForm}>
-                    <FormLabel>RESET</FormLabel>
-                  </TouchableHighlight>
-                  <FormInput
-                    value={this.state.name}
-                    onChangeText={this.setFormName}
-                  />
+                <View>
+                  <FormLabel>Name</FormLabel>
+                  <View style={styles.form}>
+                    <TouchableHighlight onPress={this.resetForm}>
+                      <FormLabel>RESET</FormLabel>
+                    </TouchableHighlight>
+                    <FormInput
+                      value={this.state.name}
+                      onChangeText={this.setFormName}
+                    />
+                  </View>
                 </View>
-                <Button
+                <Button.Primary
                   title="Next"
                   onPress={() => {
                     if (!this.state.name) {
@@ -49,16 +53,12 @@ export default class NewBlindTest extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  },
   form: {
     flexDirection: "row",
     justifyContent: "space-between"
