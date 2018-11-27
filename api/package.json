@@ -8,7 +8,8 @@
     "dev": "nodemon",
     "test": "jest",
     "lint": "tslint src/**/*.ts && prettier ./src/**.{js,ts} --list-different",
-    "format": "prettier ./src/**/*.{js,ts} --write"
+    "format": "prettier ./src/**/*.{js,ts} --write",
+    "package-lambda": "bin/package.sh"
   },
   "author": "",
   "license": "ISC",

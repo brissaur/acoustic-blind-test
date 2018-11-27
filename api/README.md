@@ -2,62 +2,6 @@
 
 - aws-sdk
 
-# Object
-
-## Team (string)
-
-## Song 
-
-{
-    id: Number
-    title: string,
-    artist: string,
-    comment: string (long),
-}
-
-## BlindTest
-
-{
-    date: Date (du jour)
-    title: string
-    teams: Team[]
-    playedSong: PlayedSong[]
-}
-
-## PlayedSong
-
-{
-    songId: id
-    team: string|null
-}
-
-# API Contract
-
-## GetSong
-
-Response:
-200: [{
-    name: string,
-    artist: string,
-    comment: string,
-    id: id
-}]
-
-## Post Blindtest
-
-Request:
-- {
-    title: string,
-    date: Date
-    teams: [string],
-    playedSongs: [PlayedSong]
-}
-
-Response:
-
-204: no content
-
-
 # How to use it in dev mode
 
 We don't have
@@ -70,6 +14,11 @@ We don't have
 
 locally: ~/.local/bin/aws
 
+## Lambda
+
+### How to build and deploy lambda:
+- run bin/build.sh
+- run 
 
 ## DynamoDB request / response
 
