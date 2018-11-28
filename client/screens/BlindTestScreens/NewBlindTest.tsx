@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
 import { Button, FormInput, FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { Context, IContext } from "../../context";
@@ -16,6 +16,8 @@ export default class NewBlindTest extends React.Component<
   };
   state: IState = { name: `Blind Test ${new Date().getTime()}` };
   setFormName = (name: string) => this.setState({ name });
+  resetForm = () => this.setFormName("");
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,10 +26,15 @@ export default class NewBlindTest extends React.Component<
             return (
               <>
                 <FormLabel>Name</FormLabel>
-                <FormInput
-                  value={this.state.name}
-                  onChangeText={this.setFormName}
-                />
+                <View style={styles.form}>
+                  <TouchableHighlight onPress={this.resetForm}>
+                    <FormLabel>RESET</FormLabel>
+                  </TouchableHighlight>
+                  <FormInput
+                    value={this.state.name}
+                    onChangeText={this.setFormName}
+                  />
+                </View>
                 <Button
                   title="Next"
                   onPress={() => {
@@ -51,5 +58,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF"
+  },
+  form: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });
