@@ -3,13 +3,13 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 
 interface IProps {
-  title?: string;
+  title: string;
 }
 
 export const MainPage: React.SFC<IProps> = ({ children, title }) => (
   <ScrollView contentContainerStyle={styles.container}>
     <>
-      {title ? <Text h1>{title}</Text> : null}
+      <Text h1>{title}</Text>
       {children}
     </>
   </ScrollView>
