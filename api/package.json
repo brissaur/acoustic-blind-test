@@ -9,7 +9,8 @@
     "test": "jest",
     "lint": "tslint src/**/*.ts && prettier ./src/**.{js,ts} --list-different",
     "format": "prettier ./src/**/*.{js,ts} --write",
-    "package-lambda": "bin/package.sh"
+    "package-lambda": "bin/package_lambda.sh",
+    "publish-lambda": "bin/publish_lambda.sh"
   },
   "author": "",
   "license": "ISC",

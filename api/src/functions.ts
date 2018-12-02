@@ -1,7 +1,9 @@
 import { SongRepositoryFactory } from "./repositories/song/factory";
 
-export function getSongs(event: any, context: any, callback: any): void {
-  // @todo : To be done
+export async function getSongs(event: any, context: any, callback: Function) {
   const songRepository = SongRepositoryFactory();
-  callback(null, songRepository.getAllSongs());
+    return {
+        "statusCode": "200",
+        body: JSON.stringify(await songRepository.getAllSongs())
+    };
 }

@@ -14,6 +14,12 @@ We don't have
 
 locally: ~/.local/bin/aws
 
+~/.aws/config
+~/.aws/credentials
+
+Switch AWS profile : https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html 
+export AWS_PROFILE=acoustic-blindtest
+
 ## Lambda
 
 ### How to build and deploy lambda:
@@ -23,3 +29,8 @@ locally: ~/.local/bin/aws
 ## DynamoDB request / response
 
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html
+
+# API Gateway
+
+GET /songs
+https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/songs
