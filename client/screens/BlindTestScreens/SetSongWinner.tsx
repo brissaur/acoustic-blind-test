@@ -1,9 +1,9 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
-import { Button } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
+import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
-import { getNextSong, goToNextSong } from "../../business/Song";
+import Button from "../../ui/button/Button";
+import { MainPage } from "../../ui/layout/MainPage";
 
 export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
@@ -16,13 +16,13 @@ export default class NoMoreSongs extends React.Component<
     const songId = this.props.navigation.getParam("id");
 
     return (
-      <View style={styles.container}>
+      <MainPage title="Who?">
         <Context.Consumer>
           {(context: IContext) => {
             return (
               <>
                 {context.teams.map(team => (
-                  <Button
+                  <Button.Primary
                     key={team}
                     title={team}
                     onPress={async () => {
@@ -34,7 +34,7 @@ export default class NoMoreSongs extends React.Component<
                     }}
                   />
                 ))}
-                <Button
+                <Button.Primary
                   title={"==== NO WINNER ===="}
                   onPress={async () => {
                     await context.addResult({ songId, team: null });
@@ -48,14 +48,7 @@ export default class NoMoreSongs extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  }
-});

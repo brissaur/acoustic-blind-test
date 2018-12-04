@@ -1,9 +1,10 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-elements";
+import { Text, View } from "react-native";
 import { NavigationScreenProps } from "react-navigation";
 import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
+import Button from "../../ui/button/Button";
+import { MainPage } from "../../ui/layout/MainPage";
 
 export default class SongBeingPlayed extends React.Component<
   NavigationScreenProps
@@ -17,7 +18,7 @@ export default class SongBeingPlayed extends React.Component<
     const ID = this.props.navigation.getParam("id");
 
     return (
-      <View style={styles.container}>
+      <MainPage title="Playing...">
         <Context.Consumer>
           {(context: IContext) => {
             const mySong = context.songs.find(song => song.id === ID);
@@ -27,14 +28,13 @@ export default class SongBeingPlayed extends React.Component<
             return (
               <>
                 <View>
-                  <Text>Playing... {mySong.id}</Text>
                   <Text>title: {mySong.title}</Text>
                   <Text>artist: {mySong.artist}</Text>
                   {mySong.comment ? (
                     <Text>comment: {mySong.comment}</Text>
                   ) : null}
                 </View>
-                <Button
+                <Button.Primary
                   title="Winner"
                   onPress={() => {
                     this.props.navigation.push("SetSongWinner", {
@@ -42,7 +42,7 @@ export default class SongBeingPlayed extends React.Component<
                     });
                   }}
                 />
-                <Button
+                <Button.Secondary
                   title={"SKIP"}
                   onPress={async () => {
                     await context.skipSong(ID);
@@ -53,7 +53,7 @@ export default class SongBeingPlayed extends React.Component<
                     );
                   }}
                 />
-                <Button
+                <Button.Secondary
                   title="End"
                   onPress={() => {
                     this.props.navigation.push("BlindTestFinished");
@@ -63,14 +63,7 @@ export default class SongBeingPlayed extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  }
-});

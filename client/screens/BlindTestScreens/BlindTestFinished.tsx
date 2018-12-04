@@ -1,8 +1,10 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
+import { Text } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { computeDetails, computeWinner } from "../../business/BlindTest";
 import { Context, IContext } from "../../context";
+import { MainPage } from "../../ui/layout/MainPage";
 
 export default class BlindTestFinished extends React.Component<
   NavigationScreenProps
@@ -13,14 +15,14 @@ export default class BlindTestFinished extends React.Component<
 
   render() {
     return (
-      <View style={styles.container}>
+      <MainPage title="The dices are jetteed!">
         <Context.Consumer>
           {(context: IContext) => {
             const details = computeDetails(context);
             const { team: winner, score } = computeWinner(details);
             return (
               <>
-                <Text>
+                <Text h3>
                   Winner: {winner} with {score} points
                 </Text>
                 <Text>Details:</Text>
@@ -29,7 +31,7 @@ export default class BlindTestFinished extends React.Component<
                   <View key={team}>
                     <Text>Team {team} won the songs:</Text>
                     {songs.map(song => (
-                      <Text key={song.id}>{`${song.title} // + ${
+                      <Text key={song.id}>{`${song.title} // ${
                         song.artist
                       }`}</Text>
                     ))}
@@ -39,14 +41,7 @@ export default class BlindTestFinished extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  }
-});

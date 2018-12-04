@@ -1,9 +1,11 @@
 import * as React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import { Button, FormLabel, FormInput } from "react-native-elements";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { FormInput, FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { startBlindTest } from "../../business/BlindTest";
 import { Context, IContext, ITeam } from "../../context";
+import Button from "../../ui/button/Button";
+import { MainPage } from "../../ui/layout/MainPage";
 
 interface IState {
   teams: ITeam[];
@@ -32,34 +34,36 @@ export default class AddTeams extends React.Component<
     });
   render() {
     return (
-      <View style={styles.container}>
+      <MainPage title="Please add teams!">
         <Context.Consumer>
           {(context: IContext) => {
             return (
               <>
-                {this.state.teams.map((team, index) => (
-                  <View key={team} style={styles.team}>
-                    <Text>
-                      Team {index + 1}:{team}
-                    </Text>
-                    <TouchableHighlight onPress={() => this.removeTeam(team)}>
-                      <Text>DELETE</Text>
-                    </TouchableHighlight>
-                  </View>
-                ))}
+                <View>
+                  {this.state.teams.map((team, index) => (
+                    <View key={team} style={styles.team}>
+                      <Text>
+                        Team {index + 1}:{team}
+                      </Text>
+                      <TouchableHighlight onPress={() => this.removeTeam(team)}>
+                        <Text>DELETE</Text>
+                      </TouchableHighlight>
+                    </View>
+                  ))}
+                </View>
                 <FormLabel>New team name:</FormLabel>
                 <FormInput
                   value={this.state.newTeam}
                   onChangeText={this.onTextChange}
                 />
-                <Button
+                <Button.Secondary
                   title="Add Team"
                   onPress={() => {
                     this.addTeam(this.state.newTeam);
                     this.resetInput();
                   }}
                 />
-                <Button
+                <Button.Primary
                   title="Start Blind Test"
                   onPress={() =>
                     startBlindTest({
@@ -73,16 +77,12 @@ export default class AddTeams extends React.Component<
             );
           }}
         </Context.Consumer>
-      </View>
+      </MainPage>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF"
-  },
   team: {
     flexDirection: "row",
     justifyContent: "space-between"
