@@ -9,6 +9,7 @@
     "test": "jest",
     "lint": "tslint src/**/*.ts && prettier ./src/**.{js,ts} --list-different",
     "format": "prettier ./src/**/*.{js,ts} --write",
+    "build": "npx tsc",
     "package-lambda": "bin/package_lambda.sh",
     "publish-lambda": "bin/publish_lambda.sh"
   },

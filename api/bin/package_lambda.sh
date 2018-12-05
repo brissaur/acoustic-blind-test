@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # run the command from the api/ folder
-npx tsc
+yarn build
 cd dist/
 zip -r lambda.zip ./

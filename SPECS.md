@@ -46,10 +46,16 @@ Request:
 - {
     title: string,
     date: Date
-    teams: [string],
-    playedSongs: [PlayedSong]
+    teams: string[],
+    playedSongs: PlayedSong[]
 }
 
 Response:
 
-204: no content
+201
+Payload: {
+    title: string,
+    date: Date
+    teams: string[]],
+    playedSongs: PlayedSong[]
+}
