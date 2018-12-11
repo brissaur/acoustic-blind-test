@@ -1,28 +1,40 @@
 {
   "expo": {
-    "name": "client",
-    "description": "A very interesting project.",
-    "slug": "client",
+    "name": "Acoustic Blind Test",
+    "description": "A tool for musician to host acoustic blind tests",
+    "slug": "acoustic-blind-test",
     "privacy": "public",
     "sdkVersion": "31.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./logo.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bussaur.acb"
+    },
+    "android": {
+      "package": "com.bussaur.acb"
     },
     "packagerOpts": {
-      "sourceExts": ["ts", "tsx"],
+      "sourceExts": [
+        "ts",
+        "tsx"
+      ],
       "transformer": "node_modules/react-native-typescript-transformer"
     }
   }
