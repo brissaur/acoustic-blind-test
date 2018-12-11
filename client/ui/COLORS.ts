@@ -1,4 +1,4 @@
 export default {
-  PRIMARY: "purple",
-  SECONDARY: "grey"
+  PRIMARY: "#8A2BE2",
+  SECONDARY: "#b19cd9"
 };
