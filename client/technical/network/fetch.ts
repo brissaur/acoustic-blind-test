@@ -1,6 +1,10 @@
 import { API_HOST, API_SECRET } from "./constants";
 
-type PATHS = "/songs" | "/blindtest";
+export enum PATH {
+  blindtests = "/blindtests",
+  songs = "/songs"
+}
+
 type METHODS = "GET" | "POST";
 
 const computeUrl = (path: string) => `https://${API_HOST}${path}`;
@@ -15,7 +19,7 @@ export const fetchApi = async ({
   headers,
   body
 }: {
-  path: PATHS;
+  path: PATH;
   method?: METHODS;
   headers?: HeadersInit_;
   body?: BodyInit_;
@@ -29,7 +33,7 @@ export const fetchApi = async ({
       headers: { ...headers, ...DEFAULT_HEADERS }
     });
     global.console.log(path, "=>", result.status);
-    if (result.status !== 200) {
+    if (![200, 201].includes(result.status)) {
       global.console.error(result.text());
       throw new Error(`${result.status}: ${result.text()}`);
     }

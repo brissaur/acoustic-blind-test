@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ISong } from "../../context";
-import { fetchApi } from "../../technical/network/fetch";
+import { fetchApi, PATH } from "../../technical/network/fetch";
 
 const DEFAULT_SONGS: ISong[] = [
   { id: 1, title: "some-title-1", artist: "some-artist-1" },
@@ -19,7 +19,9 @@ interface IProps {
 }
 export class AppBootstrapper extends React.Component<IProps> {
   async componentDidMount() {
-    const songs = await fetchApi({ path: "/songs" });
+    const songs = await fetchApi({
+      path: PATH.songs
+    });
     this.props.setSongs(songs.length > 0 ? songs : DEFAULT_SONGS);
   }
   render() {

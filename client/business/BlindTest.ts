@@ -1,6 +1,6 @@
 import { IContext, ISong, ITeam } from "./../context";
 import { getNextSong } from "./Song";
-import { fetchApi } from "../technical/network/fetch";
+import { fetchApi, PATH } from "../technical/network/fetch";
 
 export function startBlindTest({
   context,
@@ -64,7 +64,7 @@ export const finishBlindTest = async ({
   await context.setSaveBlindTestStatus(true, false);
 
   fetchApi({
-    path: "/blindtest",
+    path: PATH.blindtests,
     method: "POST",
     body: JSON.stringify(blindTest)
   }).then(
