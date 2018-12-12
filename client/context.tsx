@@ -15,6 +15,13 @@ export type ITeam = string;
 
 const INITIAL_CONTEXT = {};
 
+interface BlindTestObject {
+  playedSong: IResult[];
+  teams: ITeam[];
+  title: string;
+  date: Date;
+}
+
 export const Context = React.createContext(INITIAL_CONTEXT);
 
 export interface IContext extends IState {
@@ -25,6 +32,8 @@ export interface IContext extends IState {
   setName(name: string): Promise<void>;
   skipSong(songId: ISongId): Promise<void>;
   replaySkipped(): Promise<void>;
+  setSaveBlindTestStatus(isLoading: boolean, hasError: boolean): Promise<void>;
+  getBlindTestObject(): BlindTestObject;
 }
 type IProps = {};
 interface IState {
@@ -34,6 +43,8 @@ interface IState {
   name: string;
   skipedSongs: ISongId[];
   didReplaySkipped: boolean;
+  isSavingBlindTest: boolean;
+  hasBlindTestError: boolean;
 }
 export class ContextWrapper extends React.Component<IProps, IState> {
   constructor(props: {}) {
@@ -45,7 +56,9 @@ export class ContextWrapper extends React.Component<IProps, IState> {
       teams: [],
       name: "",
       skipedSongs: [],
-      didReplaySkipped: false
+      didReplaySkipped: false,
+      isSavingBlindTest: false,
+      hasBlindTestError: false
     };
   }
 
@@ -57,7 +70,9 @@ export class ContextWrapper extends React.Component<IProps, IState> {
     setTeams: this.setTeams,
     setName: this.setName,
     skipSong: this.skipSong,
-    replaySkipped: this.replaySkipped
+    replaySkipped: this.replaySkipped,
+    getBlindTestObject: this.getBlindTestObject,
+    setSaveBlindTestStatus: this.setSaveBlindTestStatus
   });
 
   setTeams = (teams: ITeam[]) =>
@@ -83,6 +98,21 @@ export class ContextWrapper extends React.Component<IProps, IState> {
   replaySkipped = () =>
     new Promise(resolve =>
       this.setState({ didReplaySkipped: true, skipedSongs: [] }, resolve)
+    );
+
+  getBlindTestObject = () => ({
+    playedSong: this.state.results,
+    teams: this.state.teams,
+    title: this.state.name,
+    date: new Date().toISOString()
+  });
+
+  setSaveBlindTestStatus = (
+    isSavingBlindTest: boolean,
+    hasBlindTestError: boolean
+  ) =>
+    new Promise(resolve =>
+      this.setState({ isSavingBlindTest, hasBlindTestError }, resolve)
     );
 
   render() {

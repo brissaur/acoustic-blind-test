@@ -5,6 +5,7 @@ import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
 import { MainPage } from "../../ui/layout/MainPage";
+import { finishBlindTest } from "../../business/BlindTest";
 
 export default class SongBeingPlayed extends React.Component<
   NavigationScreenProps
@@ -55,9 +56,12 @@ export default class SongBeingPlayed extends React.Component<
                 />
                 <Button.Secondary
                   title="End"
-                  onPress={() => {
-                    this.props.navigation.push("BlindTestFinished");
-                  }}
+                  onPress={() =>
+                    finishBlindTest({
+                      context,
+                      navigation: this.props.navigation
+                    })
+                  }
                 />
               </>
             );

@@ -1,5 +1,6 @@
 import { IContext, ISong, ITeam } from "./../context";
 import { getNextSong } from "./Song";
+import { fetchApi } from "../technical/network/fetch";
 
 export function startBlindTest({
   context,
@@ -50,3 +51,29 @@ export function computeWinner(
     { team: null, score: 0 }
   );
 }
+
+export const finishBlindTest = async ({
+  context,
+  navigation
+}: {
+  context: IContext;
+  navigation: any;
+}) => {
+  const blindTest = context.getBlindTestObject();
+
+  await context.setSaveBlindTestStatus(true, false);
+
+  fetchApi({
+    path: "/blindtest",
+    method: "POST",
+    body: JSON.stringify(blindTest)
+  }).then(
+    () => context.setSaveBlindTestStatus(false, false),
+    e => {
+      global.console.error(e);
+      context.setSaveBlindTestStatus(false, true);
+    }
+  );
+
+  navigation.push("BlindTestFinished");
+};
