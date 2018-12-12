@@ -1,9 +1,10 @@
 import * as React from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
-import { FormInput, FormLabel } from "react-native-elements";
+import { FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
+import { TextInput } from "../../ui/form/text-input";
 import { MainPage } from "../../ui/layout/MainPage";
 
 interface IState {
@@ -33,7 +34,7 @@ export default class NewBlindTest extends React.Component<
                     <TouchableHighlight onPress={this.resetForm}>
                       <FormLabel>RESET</FormLabel>
                     </TouchableHighlight>
-                    <FormInput
+                    <TextInput
                       value={this.state.name}
                       onChangeText={this.setFormName}
                     />

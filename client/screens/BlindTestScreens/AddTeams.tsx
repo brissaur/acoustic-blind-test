@@ -1,10 +1,11 @@
 import * as React from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import { FormInput, FormLabel } from "react-native-elements";
+import { FormLabel } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { startBlindTest } from "../../business/BlindTest";
 import { Context, IContext, ITeam } from "../../context";
 import Button from "../../ui/button/Button";
+import { TextInput } from "../../ui/form/text-input";
 import { MainPage } from "../../ui/layout/MainPage";
 
 interface IState {
@@ -52,7 +53,8 @@ export default class AddTeams extends React.Component<
                   ))}
                 </View>
                 <FormLabel>New team name:</FormLabel>
-                <FormInput
+                <TextInput
+                  underlineColorAndroid="purple"
                   value={this.state.newTeam}
                   onChangeText={this.onTextChange}
                 />
