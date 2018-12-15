@@ -3,7 +3,7 @@ import Song from "./entity";
 import { AttributeMap } from "aws-sdk/clients/dynamodb";
 
 export interface ExtractSongData extends ExtractData {
-  //todo
+  // todo
 }
 
 export default class SongHydrator implements IHydrator<ExtractSongData> {

@@ -7,7 +7,7 @@
     "start": "ts-node src/server.ts",
     "dev": "nodemon",
     "test": "jest",
-    "lint": "tslint src/**/*.ts && prettier ./src/**.{js,ts} --list-different",
+    "lint": "tslint src/**/**/*.ts && prettier ./src/**.{js,ts} --list-different",
     "format": "prettier ./src/**/*.{js,ts} --write",
     "build": "npx tsc",
     "package-lambda": "bin/package_lambda.sh",
@@ -36,6 +36,7 @@
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.16.0",
+    "tslint-no-focused-test": "^0.5.0",
     "typescript": "^3.1.6"
   },
   "husky": {

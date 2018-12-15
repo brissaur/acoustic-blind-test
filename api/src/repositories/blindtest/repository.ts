@@ -10,15 +10,14 @@ export default class BlindtestRepository extends AbstractRepository<
   async createBlindtest(blindtest: Blindtest): Promise<string> {
     try {
       const data = this.hydrator.extract(blindtest);
-      if (data.id === undefined) {
-        data.id = uuid();
-      }
+      data.id = data.id || uuid();
       const schema = blindtestSchema;
       schema.Item = data;
       await this.db.put(schema).promise();
       return data.id;
     } catch (error) {
       // @todo: Use a truly logger
+      // tslint:disable-next-line
       console.log("error", error);
       throw error;
     }

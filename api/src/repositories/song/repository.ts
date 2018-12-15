@@ -19,6 +19,7 @@ export default class SongRepository extends AbstractRepository<
       return [];
     } catch (error) {
       // @todo: Use a truly logger
+      // tslint:disable-next-line
       console.log("error", error);
       throw error;
     }

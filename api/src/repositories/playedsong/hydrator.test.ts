@@ -1,7 +1,7 @@
 import PlayedSong from "../playedsong/entity";
 import PlayedSongHydrator from "./hydrator";
 
-test.only("extract method", () => {
+test("extract method", () => {
   const hydrator = new PlayedSongHydrator();
   const playedSong = new PlayedSong();
 
