@@ -6,7 +6,7 @@
 ## Song 
 
 {
-    id: Number
+    id: string
     title: string,
     artist: string,
     comment: string (long),
@@ -15,6 +15,7 @@
 ## BlindTest
 
 {
+    id: string
     date: Date (du jour)
     title: string
     teams: Team[]
@@ -24,7 +25,7 @@
 ## PlayedSong
 
 {
-    songId: id
+    songId: string
     team: string|null
 }
 
@@ -37,7 +38,7 @@ Response:
     name: string,
     artist: string,
     comment: string,
-    id: id
+    id: string
 }]
 
 ## Post Blindtest
@@ -53,9 +54,4 @@ Request:
 Response:
 
 201
-Payload: {
-    title: string,
-    date: Date
-    teams: string[]],
-    playedSongs: PlayedSong[]
-}
+Payload: id of object

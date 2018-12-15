@@ -16,8 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/uuid": "^3.4.4",
     "aws-sdk": "^2.358.0",
-    "hapi": "^17.7.0"
+    "hapi": "^17.7.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",

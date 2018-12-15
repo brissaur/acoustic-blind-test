@@ -34,6 +34,23 @@ Interesting files:
 ## DynamoDB request / response
 
 - https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html
+- https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_AttributeValue.html
+
+### Blindtest Item
+
+JSON sample to be used from the AWS Web UI
+{
+  "id": 1,
+  "date": "2018-12-05 20:53:00",
+  "title": "Blindtest de test",
+  "teams": ["teamA", "teamB"],
+  "playedSongs": [{
+    "songId": 1,
+    "team": "teamA"
+  }]
+}
+
+### Song Item
 
 ## API Gateway
 
@@ -41,3 +58,5 @@ API key header : "x-api-key"
 
 GET /songs
 https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/songs
+
+POST /blindtest
