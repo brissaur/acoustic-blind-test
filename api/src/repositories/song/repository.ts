@@ -1,8 +1,11 @@
 import { AbstractRepository } from "../abstract";
 import { schema } from "./scan.schema";
 import Song from "./entity";
+import { ExtractSongData } from "./hydrator";
 
-export default class SongRepository extends AbstractRepository {
+export default class SongRepository extends AbstractRepository<
+  ExtractSongData
+> {
   async getAllSongs(): Promise<Song[]> {
     try {
       const result = await this.db.scan(schema).promise();
@@ -16,6 +19,7 @@ export default class SongRepository extends AbstractRepository {
       return [];
     } catch (error) {
       // @todo: Use a truly logger
+      // tslint:disable-next-line
       console.log("error", error);
       throw error;
     }

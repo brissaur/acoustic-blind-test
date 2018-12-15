@@ -3,9 +3,14 @@
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
+  "rulesDirectory": [
+    "tslint-no-focused-test"
+  ],
   "rules": {
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-console": [true, "log", "error"]
+    "no-console": [true, "log", "error"],
+    "no-focused-test": true,
+    "import-name": false
   }
 }

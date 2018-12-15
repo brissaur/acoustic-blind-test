@@ -1,10 +1,10 @@
 import { IHydrator } from "./hydratorInterface";
-import dynamodb from "aws-sdk/clients/dynamodb";
+import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
-export class AbstractRepository {
-  db: dynamodb;
-  hydrator: IHydrator;
-  constructor(connection: dynamodb, hydrator: IHydrator) {
+export class AbstractRepository<E> {
+  db: DocumentClient;
+  hydrator: IHydrator<E>;
+  constructor(connection: DocumentClient, hydrator: IHydrator<E>) {
     this.db = connection;
     this.hydrator = hydrator;
   }
