@@ -59,4 +59,5 @@ API key header : "x-api-key"
 GET /songs
 https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/songs
 
-POST /blindtest
+POST /blindtests
+https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/blindtests
