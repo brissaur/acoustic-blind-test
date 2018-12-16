@@ -19,18 +19,18 @@ export async function postBlindtest(
 ) {
   const blindtestRepository = blindtestRepositoryFactory();
   try {
+    const body = JSON.parse(event.body);
     const blindtest = new Blindtest();
-    blindtest.setTitle(event.title);
-    blindtest.setDate(new Date(event.date));
-    blindtest.setTeams(event.teams);
-    const playedSongs = event.playedSongs.map((ps: PlayedSong) => {
+    blindtest.setTitle(body.title);
+    blindtest.setDate(new Date(body.date));
+    blindtest.setTeams(body.teams);
+    const playedSongs = body.playedSongs.map((ps: PlayedSong) => {
       const playedSong = new PlayedSong();
       playedSong.setTeam(ps.team);
       playedSong.setSongId(ps.songId);
       return playedSong;
     });
     blindtest.setPlayedSongs(playedSongs);
-    console.log(blindtest);
     return {
       statusCode: "200",
       body: JSON.stringify(await blindtestRepository.createBlindtest(blindtest))

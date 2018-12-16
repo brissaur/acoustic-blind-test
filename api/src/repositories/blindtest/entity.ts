@@ -6,8 +6,8 @@ export default class Blindtest implements IEntity {
   id!: string;
   date!: Date;
   title!: string;
-  teams!: Team[];
-  playedSongs!: PlayedSong[];
+  teams: Team[] = [];
+  playedSongs: PlayedSong[] = [];
   getId(): string {
     return this.id;
   }
