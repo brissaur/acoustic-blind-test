@@ -1,20 +1,34 @@
-import { ExtractData, IHydrator } from "../hydratorInterface";
+import { ExtractData, HydrateData, IHydrator } from "../hydratorInterface";
 import Song from "./entity";
-import { AttributeMap } from "aws-sdk/clients/dynamodb";
 
 export interface ExtractSongData extends ExtractData {
-  // todo
+  id: undefined | string;
+  artist: string;
+  title: string;
+  comment: undefined | string;
 }
 
-export default class SongHydrator implements IHydrator<ExtractSongData> {
-  hydrate(data: AttributeMap, song: Song): void {
-    song.setId(+data.id["N"]!);
-    song.setArtist(data.artist["S"]!);
-    song.setComment(data.comment["S"]!);
-    song.setTitle(data.title["S"]!);
+export interface HydrateSongData extends HydrateData {
+  id: string;
+  artist: string;
+  title: string;
+  comment: undefined | string;
+}
+
+export default class SongHydrator
+  implements IHydrator<ExtractSongData, HydrateSongData> {
+  hydrate(data: HydrateSongData, song: Song): void {
+    song.setId(data.id);
+    song.setArtist(data.artist);
+    song.setComment(data.comment);
+    song.setTitle(data.title);
   }
-  extract(song: Song) {
-    // @todo
-    return {};
+  extract(song: Song): ExtractSongData {
+    return {
+      id: song.getId(),
+      artist: song.getArtist(),
+      comment: song.getComment(),
+      title: song.getTitle()
+    };
   }
 }

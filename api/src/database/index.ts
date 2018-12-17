@@ -1,15 +1,14 @@
-import dynamodb, { DocumentClient } from "aws-sdk/clients/dynamodb";
-import awsSdk from "aws-sdk";
+import awsSdk, { DynamoDB } from "aws-sdk";
 import { AWS_REGION } from "../../build.properties";
 
 awsSdk.config.update({ region: AWS_REGION });
 
 export default class DataSource {
-  connection: DocumentClient;
+  connection: DynamoDB.DocumentClient;
   constructor() {
-    this.connection = new DocumentClient();
+    this.connection = new DynamoDB.DocumentClient();
   }
-  getConnection(): DocumentClient {
+  getConnection(): DynamoDB.DocumentClient {
     return this.connection;
   }
 }

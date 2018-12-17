@@ -1,29 +1,28 @@
+jest.mock("uuid");
 import SongRepository from "./repository";
-
-jest.mock("aws-sdk/clients/dynamodb");
-import dynamodb from "aws-sdk/clients/dynamodb";
 import SongHydrator from "./hydrator";
+import Song from "./entity";
 
 test("getAllSongs method works", async () => {
   const getConnection = jest.fn(() => {
-    const service = new dynamodb();
-    service.scan = jest.fn(() => {
-      return {
-        promise: () => {
-          return Promise.resolve({
-            Items: [
-              {
-                comment: { S: "comment" },
-                artist: { S: "artist" },
-                id: { N: "1" },
-                title: { S: "test" }
-              }
-            ]
-          });
-        }
-      };
-    });
-    return service;
+    return {
+      scan: jest.fn(() => {
+        return {
+          promise: () => {
+            return Promise.resolve({
+              Items: [
+                {
+                  comment: "comment",
+                  artist: "artist",
+                  id: "1",
+                  title: "test"
+                }
+              ]
+            });
+          }
+        };
+      })
+    };
   });
   const repo = new SongRepository(getConnection(), new SongHydrator());
   const songs = await repo.getAllSongs();
@@ -32,15 +31,15 @@ test("getAllSongs method works", async () => {
 
 test("getAllSongs method throw error", async () => {
   const getConnection = jest.fn(() => {
-    const service = new dynamodb();
-    service.scan = jest.fn(() => {
-      return {
-        promise: () => {
-          return Promise.reject("error occured");
-        }
-      };
-    });
-    return service;
+    return {
+      scan: jest.fn(() => {
+        return {
+          promise: () => {
+            return Promise.reject("error occured");
+          }
+        };
+      })
+    };
   });
   const repo = new SongRepository(getConnection(), new SongHydrator());
   try {
@@ -48,4 +47,34 @@ test("getAllSongs method throw error", async () => {
   } catch (e) {
     expect(e).toEqual("error occured");
   }
+});
+
+test("createSong works", async () => {
+  const getConnection = jest.fn(() => {
+    return {
+      put: jest.fn(() => {
+        return {
+          promise: () => {
+            return Promise.resolve({
+              Items: [
+                {
+                  id: "00000000-0000-0000-0000-000000000001",
+                  artist: "artist",
+                  title: "title",
+                  comment: "comment"
+                }
+              ]
+            });
+          }
+        };
+      })
+    };
+  });
+  const repo = new SongRepository(getConnection(), new SongHydrator());
+  const song = new Song();
+  song.setArtist("artist");
+  song.setTitle("title");
+  song.setComment("comment");
+  const result = await repo.createSong(song);
+  expect(result).toBe("mock-uuid");
 });

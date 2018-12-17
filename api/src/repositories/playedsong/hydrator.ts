@@ -1,6 +1,5 @@
-import { ExtractData, IHydrator } from "../hydratorInterface";
+import { ExtractData, HydrateData, IHydrator } from "../hydratorInterface";
 import PlayedSong from "./entity";
-import { AttributeMap } from "aws-sdk/clients/dynamodb";
 import Team from "../team/entity";
 
 interface ExtractPlayedSongData extends ExtractData {
@@ -9,7 +8,7 @@ interface ExtractPlayedSongData extends ExtractData {
 }
 
 export default class PlayedSongHydrator implements IHydrator {
-  hydrate(data: AttributeMap, playedSong: PlayedSong): void {
+  hydrate(data: HydrateData, playedSong: PlayedSong): void {
     // @todo
   }
   extract(playedSong: PlayedSong): ExtractPlayedSongData {

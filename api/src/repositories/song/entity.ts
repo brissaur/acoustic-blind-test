@@ -1,14 +1,14 @@
 import { IEntity } from "../entitytInterface";
 
 export default class Song implements IEntity {
-  id!: Number;
+  id!: string;
   title!: string;
   artist!: string;
   comment: string | undefined;
-  getId(): Number {
+  getId(): string {
     return this.id;
   }
-  setId(id: Number): void {
+  setId(id: string): void {
     this.id = id;
   }
   getTitle(): string {

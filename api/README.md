@@ -61,3 +61,6 @@ https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/songs
 
 POST /blindtests
 https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/blindtests
+
+POST /songs
+https://e8j6pjc91j.execute-api.eu-west-3.amazonaws.com/production/songs
