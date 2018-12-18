@@ -3,7 +3,7 @@
 
 ## Team (string)
 
-## Song 
+## Song
 
 `
 {
@@ -47,9 +47,9 @@ sample:
 
 Response:
 200: [{
-    name: string,
-    artist: string,
-    comment: string,
+    title: string,
+    artist?: string,
+    comment?: string,
     id: string
 }]
 

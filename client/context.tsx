@@ -4,7 +4,7 @@ export type ISongId = number;
 export interface ISong {
   id: ISongId;
   title: string;
-  artist: string;
+  artist?: string;
   comment?: string;
 }
 export interface IResult {

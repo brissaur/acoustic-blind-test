@@ -30,7 +30,7 @@ export default class SongBeingPlayed extends React.Component<
               <>
                 <View>
                   <Text>title: {mySong.title}</Text>
-                  <Text>artist: {mySong.artist}</Text>
+                  <Text>artist: {mySong.artist || "- ? -"}</Text>
                   {mySong.comment ? (
                     <Text>comment: {mySong.comment}</Text>
                   ) : null}
