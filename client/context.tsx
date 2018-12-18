@@ -16,10 +16,10 @@ export type ITeam = string;
 const INITIAL_CONTEXT = {};
 
 interface BlindTestObject {
-  playedSong: IResult[];
+  playedSongs: IResult[];
   teams: ITeam[];
   title: string;
-  date: Date;
+  date: string;
 }
 
 export const Context = React.createContext(INITIAL_CONTEXT);
@@ -100,8 +100,8 @@ export class ContextWrapper extends React.Component<IProps, IState> {
       this.setState({ didReplaySkipped: true, skipedSongs: [] }, resolve)
     );
 
-  getBlindTestObject = () => ({
-    playedSong: this.state.results,
+  getBlindTestObject = (): BlindTestObject => ({
+    playedSongs: this.state.results,
     teams: this.state.teams,
     title: this.state.name,
     date: new Date().toISOString()
