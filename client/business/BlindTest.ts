@@ -27,7 +27,7 @@ interface IBlindTestResultDetails {
 export function computeDetails(context: IContext) {
   const emptyTeamHashMap = context.teams.reduce<IBlindTestResultDetails>(
     (acc, team) => ({ ...acc, [team]: [] }),
-    {}
+    { null: [] }
   );
 
   return context.results.reduce(
@@ -47,7 +47,7 @@ export function computeWinner(
 ): { team: ITeam | null; score: number } {
   return Object.entries(details).reduce<{ team: ITeam | null; score: number }>(
     (acc, [team, songs]) =>
-      songs.length > acc.score ? { team, score: songs.length } : acc,
+      team && songs.length > acc.score ? { team, score: songs.length } : acc,
     { team: null, score: 0 }
   );
 }
