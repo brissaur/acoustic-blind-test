@@ -2,17 +2,17 @@ import { ExtractData, HydrateData, IHydrator } from "../hydratorInterface";
 import Song from "./entity";
 
 export interface ExtractSongData extends ExtractData {
-  id: undefined | string;
-  artist: string;
+  id?: string;
+  artist?: string;
   title: string;
-  comment: undefined | string;
+  comment?: string;
 }
 
 export interface HydrateSongData extends HydrateData {
   id: string;
-  artist: string;
+  artist?: string;
   title: string;
-  comment: undefined | string;
+  comment?: string;
 }
 
 export default class SongHydrator

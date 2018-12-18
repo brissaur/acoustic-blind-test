@@ -3,8 +3,8 @@ import { IEntity } from "../entitytInterface";
 export default class Song implements IEntity {
   id!: string;
   title!: string;
-  artist!: string;
-  comment: string | undefined;
+  artist?: string;
+  comment?: string;
   getId(): string {
     return this.id;
   }
@@ -17,10 +17,10 @@ export default class Song implements IEntity {
   setTitle(title: string): void {
     this.title = title;
   }
-  getArtist(): string {
+  getArtist(): string | undefined {
     return this.artist;
   }
-  setArtist(artist: string): void {
+  setArtist(artist: string | undefined): void {
     this.artist = artist;
   }
   getComment(): string | undefined {
