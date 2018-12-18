@@ -1,3 +1,5 @@
+require("dotenv").config({});
+
 const songs = require("./songs");
 const fetch = require("node-fetch");
 
@@ -7,7 +9,6 @@ const API_HOST =
 
 const API_SECRET =
   process.env.API_SECRET ||
-  "2OzpOMaCAd92ROHvHqeEP6sV0swkAnrg6sBoBRNF" ||
   (() => {
     throw new Error("MISSING process.env.API_SECRET");
   })();
@@ -29,4 +30,17 @@ async function postSong(songRaw) {
   global.console.log("Successfully created song", song);
 }
 
-songs.forEach(postSong);
+songs
+  .map(song => ({
+    title: song.title,
+    artist: song.artist || undefined,
+    comment: song.comment || undefined
+  }))
+  .forEach(async song => {
+    try {
+      await postSong(song);
+    } catch (e) {
+      console.log(song);
+      console.error(e);
+    }
+  });
