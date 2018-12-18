@@ -1,9 +1,9 @@
 import { AbstractRepository } from "../abstract";
 import { schema as songScanSchema } from "./scan.schema";
-import {schema as songPutSchema } from './put.schema'
+import { schema as songPutSchema } from "./put.schema";
 import Song from "./entity";
 import { ExtractSongData } from "./hydrator";
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 
 export default class SongRepository extends AbstractRepository<
   ExtractSongData
@@ -27,18 +27,18 @@ export default class SongRepository extends AbstractRepository<
     }
   }
   async createSong(song: Song): Promise<string> {
-    try{
-        const data = this.hydrator.extract(song);
-        data.id = data.id || uuid();
-        const schema = songPutSchema;
-        schema.Item = data;
+    try {
+      const data = this.hydrator.extract(song);
+      data.id = data.id || uuid();
+      const schema = songPutSchema;
+      schema.Item = data;
       await this.db.put(songPutSchema).promise();
       return data.id;
-    }catch(error){
-        // @todo: Use a truly logger
-        // tslint:disable-next-line
-        console.log("error", error);
-        throw error;
+    } catch (error) {
+      // @todo: Use a truly logger
+      // tslint:disable-next-line
+      console.log("error", error);
+      throw error;
     }
   }
 }

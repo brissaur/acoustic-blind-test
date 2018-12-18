@@ -3,7 +3,7 @@ import { default as PlayedSongHydrator } from "../playedsong/hydrator";
 import Blindtest from "./entity";
 
 export interface ExtractBlindtestData extends ExtractData {
-  id: undefined | string;
+  id?: string;
   date: string;
   title: string;
   teams: string[];
