@@ -1,0 +1,15 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "populateSongs.js",
+  "scripts": {
+    "songs:populate": "node ./populateSongs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
+}
