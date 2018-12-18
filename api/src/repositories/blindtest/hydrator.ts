@@ -1,7 +1,6 @@
-import { ExtractData, IHydrator } from "../hydratorInterface";
+import { ExtractData, HydrateData, IHydrator } from "../hydratorInterface";
 import { default as PlayedSongHydrator } from "../playedsong/hydrator";
 import Blindtest from "./entity";
-import { AttributeMap } from "aws-sdk/clients/dynamodb";
 
 export interface ExtractBlindtestData extends ExtractData {
   id: undefined | string;
@@ -17,7 +16,7 @@ export default class BlindtestHydrator
   constructor() {
     this.playedSongHydrator = new PlayedSongHydrator();
   }
-  hydrate(data: AttributeMap, blindtest: Blindtest): void {
+  hydrate(data: HydrateData, blindtest: Blindtest): void {
     // @todo
   }
   extract(blindtest: Blindtest) {

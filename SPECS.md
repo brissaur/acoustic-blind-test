@@ -5,12 +5,24 @@
 
 ## Song 
 
+`
 {
     id: string
     title: string,
     artist: string,
     comment: string (long),
 }
+`
+
+sample:
+
+`
+{
+    "title": "title",
+    "artist": "artist",
+    "comment": "comment"
+}
+`
 
 ## BlindTest
 
