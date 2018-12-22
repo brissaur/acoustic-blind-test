@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export const MainPage: React.SFC<IProps> = ({ children, title }) => (
-  <ScrollView contentContainerStyle={styles.container}>
+  <ScrollView contentContainerStyle={styles.contentcontainer}>
     <>
       <Text h1>{title}</Text>
       {children}
@@ -16,9 +16,9 @@ export const MainPage: React.SFC<IProps> = ({ children, title }) => (
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  contentcontainer: {
     justifyContent: "space-between",
+    flexGrow: 1,
     padding: 20
   }
 });
