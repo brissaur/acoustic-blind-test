@@ -1,10 +1,11 @@
 import * as React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { NavigationScreenProps } from "react-navigation";
 import { computeDetails, computeWinner } from "../../business/BlindTest";
 import { Context, IContext } from "../../context";
 import { MainPage } from "../../ui/layout/MainPage";
+import COLORS from "../../ui/COLORS";
 
 export default class BlindTestFinished extends React.Component<
   NavigationScreenProps
@@ -25,11 +26,19 @@ export default class BlindTestFinished extends React.Component<
                 <Text h3>
                   Winner: {winner} with {score} points
                 </Text>
-                <Text>Details:</Text>
-
+                <Text h4>Details:</Text>
+                {Object.entries(details).map(([team, songs]) => (
+                  <Text key={team}>
+                    {team}: {songs.length} points
+                  </Text>
+                ))}
+                <Text h4>Details:</Text>
                 {Object.entries(details).map(([team, songs]) => (
                   <View key={team}>
-                    <Text>Team {team} won the songs:</Text>
+                    <Text>
+                      Team <Text style={styles.teamName}>{team}</Text> won the
+                      songs:
+                    </Text>
                     {songs.map(song => (
                       <Text key={song.id}>{`${song.title} // ${
                         song.artist
@@ -45,3 +54,9 @@ export default class BlindTestFinished extends React.Component<
     );
   }
 }
+
+const styles = StyleSheet.create({
+  teamName: {
+    color: COLORS.PRIMARY
+  }
+});
