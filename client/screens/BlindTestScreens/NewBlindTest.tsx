@@ -6,6 +6,7 @@ import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
 import { TextInput } from "../../ui/form/text-input";
 import { MainPage } from "../../ui/layout/MainPage";
+import commonStyles from "../../ui/STYLES";
 
 interface IState {
   name: string;
@@ -28,7 +29,7 @@ export default class NewBlindTest extends React.Component<
           {({ setName }: IContext) => {
             return (
               <>
-                <View>
+                <View style={commonStyles.separatorBottom}>
                   <FormLabel>Name</FormLabel>
                   <View style={styles.form}>
                     <TouchableHighlight onPress={this.resetForm}>

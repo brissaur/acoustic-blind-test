@@ -6,6 +6,7 @@ import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
 import { MainPage } from "../../ui/layout/MainPage";
 import { finishBlindTest } from "../../business/BlindTest";
+import commonStyles from "../../ui/STYLES";
 
 export default class SongBeingPlayed extends React.Component<
   NavigationScreenProps
@@ -28,7 +29,7 @@ export default class SongBeingPlayed extends React.Component<
             }
             return (
               <>
-                <View>
+                <View style={commonStyles.separatorBottom}>
                   <Text>title: {mySong.title}</Text>
                   <Text>artist: {mySong.artist || "- ? -"}</Text>
                   {mySong.comment ? (
@@ -36,6 +37,10 @@ export default class SongBeingPlayed extends React.Component<
                   ) : null}
                 </View>
                 <Button.Primary
+                  style={[
+                    commonStyles.separatorBottom,
+                    commonStyles.separatorTop
+                  ]}
                   title="Winner"
                   onPress={() => {
                     this.props.navigation.push("SetSongWinner", {
@@ -45,6 +50,7 @@ export default class SongBeingPlayed extends React.Component<
                 />
                 <Button.Secondary
                   title={"SKIP"}
+                  style={commonStyles.separatorBottom}
                   onPress={async () => {
                     await context.skipSong(ID);
 

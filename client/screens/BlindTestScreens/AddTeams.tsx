@@ -7,6 +7,7 @@ import { Context, IContext, ITeam } from "../../context";
 import Button from "../../ui/button/Button";
 import { TextInput } from "../../ui/form/text-input";
 import { MainPage } from "../../ui/layout/MainPage";
+import commonStyles from "../../ui/STYLES";
 
 interface IState {
   teams: ITeam[];
@@ -40,7 +41,7 @@ export default class AddTeams extends React.Component<
           {(context: IContext) => {
             return (
               <>
-                <View>
+                <View style={commonStyles.separatorBottom}>
                   {this.state.teams.map((team, index) => (
                     <View key={team} style={styles.team}>
                       <Text>
@@ -52,20 +53,25 @@ export default class AddTeams extends React.Component<
                     </View>
                   ))}
                 </View>
-                <FormLabel>New team name:</FormLabel>
-                <TextInput
-                  underlineColorAndroid="purple"
-                  value={this.state.newTeam}
-                  onChangeText={this.onTextChange}
-                />
+                <View style={commonStyles.separatorBottom}>
+                  <FormLabel>New team name:</FormLabel>
+                  <TextInput
+                    underlineColorAndroid="purple"
+                    value={this.state.newTeam}
+                    onChangeText={this.onTextChange}
+                  />
+                </View>
+
                 <Button.Secondary
                   title="Add Team"
+                  style={commonStyles.separatorBottom}
                   onPress={() => {
                     this.addTeam(this.state.newTeam);
                     this.resetInput();
                   }}
                 />
                 <Button.Primary
+                  style={commonStyles.separatorTop}
                   title="Start Blind Test"
                   onPress={() =>
                     startBlindTest({

@@ -6,6 +6,7 @@ import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
 import { MainPage } from "../../ui/layout/MainPage";
+import commonStyles from "../../ui/STYLES";
 
 export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
@@ -25,6 +26,7 @@ export default class NoMoreSongs extends React.Component<
                 <Text h3>There are no more songs. What do you want to do?</Text>
 
                 <Button.Primary
+                  style={commonStyles.separatorBottom}
                   title={"REPLAY SKIPPED"}
                   onPress={async () => {
                     await context.replaySkipped();

@@ -4,6 +4,7 @@ import { goToNextSong } from "../../business/Song";
 import { Context, IContext } from "../../context";
 import Button from "../../ui/button/Button";
 import { MainPage } from "../../ui/layout/MainPage";
+import commonStyles from "../../ui/STYLES";
 
 export default class NoMoreSongs extends React.Component<
   NavigationScreenProps
@@ -23,6 +24,7 @@ export default class NoMoreSongs extends React.Component<
               <>
                 {context.teams.map(team => (
                   <Button.Primary
+                    style={commonStyles.separatorBottom}
                     key={team}
                     title={team}
                     onPress={async () => {
