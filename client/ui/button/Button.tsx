@@ -1,15 +1,15 @@
 import * as React from "react";
 import { Button as RNEButton, ButtonProps } from "react-native-elements";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet } from "react-native";
 import COLORS from "../COLORS";
 
-const Primary = ({ ...params }: ButtonProps) => (
-  <RNEButton buttonStyle={[styles.primary]} {...params} />
+const Primary = ({ style, ...params }: ButtonProps) => (
+  <RNEButton buttonStyle={[style, styles.primary]} {...params} />
 );
 
-const Secondary = ({ ...params }: ButtonProps) => (
+const Secondary = ({ style, ...params }: ButtonProps) => (
   <RNEButton
-    buttonStyle={[styles.secondary]}
+    buttonStyle={[style, styles.secondary]}
     color={COLORS.PRIMARY}
     {...params}
   />
