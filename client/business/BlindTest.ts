@@ -62,6 +62,7 @@ export const finishBlindTest = async ({
   const blindTest = context.getBlindTestObject();
 
   await context.setSaveBlindTestStatus(true, false);
+  global.console.log("Posting blind test", blindTest);
 
   fetchApi({
     path: PATH.blindtests,

@@ -14,8 +14,8 @@ import BlindTestFinished from "../screens/BlindTestScreens/BlindTestFinished";
 import NoMoreSongs from "../screens/BlindTestScreens/NoMoreSongs";
 
 const BlindTestStack = createStackNavigator({
-  AddTeams,
   NewBlindTest,
+  AddTeams,
   SongBeingPlayed,
   SetSongWinner,
   BlindTestFinished,
